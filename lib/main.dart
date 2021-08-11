@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'src/my_app.dart';
 
-/*Git Dsefault Bottom Navigation */
+/*Git Default Bottom Navigation */
 void main() {
   runApp(MyApp());
 }
