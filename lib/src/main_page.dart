@@ -62,6 +62,8 @@ class _BottomNavigationState extends State<MainPage> {
             index: _currentTab.index,
             children: _getNavigators,
           ),
+
+          //child: _getNavigator(_currentTab),
         ),
         bottomNavigationBar: BottomNavBar(
           currentIndex: _currentTab.index,
@@ -69,6 +71,21 @@ class _BottomNavigationState extends State<MainPage> {
         ),
       ),
     );
+  }
+
+  Widget _getNavigator(TabItem tabItem) {
+    switch (tabItem) {
+      case TabItem.home:
+        return HomeNavigator(navigatorKey: _navigatorKeys[TabItem.home]);
+      case TabItem.search:
+        return SearchNavigator(navigatorKey: _navigatorKeys[TabItem.search]);
+      case TabItem.notifications:
+        return NotificationsNavigator(
+            navigatorKey: _navigatorKeys[TabItem.notifications]);
+      case TabItem.favorites:
+        return FavoritesNavigator(
+            navigatorKey: _navigatorKeys[TabItem.favorites]);
+    }
   }
 
   List<Widget> get _getNavigators {
