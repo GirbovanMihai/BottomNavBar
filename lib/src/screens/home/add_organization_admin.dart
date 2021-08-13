@@ -18,35 +18,13 @@ class AddOrganizationAdmin extends StatelessWidget {
           children: [
             Text('Add Organization Admin'),
             ElevatedButton(
-              onPressed: () {
-                _showDialog(context);
-              },
+              onPressed: () =>
+                  Navigator.popUntil(context, (route) => route.isFirst),
               child: Text('Save'),
             )
           ],
         ),
       ),
-    );
-  }
-
-  void _showDialog(BuildContext context) {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('CONFIRMATIONS'),
-          content: const Text(' You just created a new organization.'),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.popUntil(context, (route) => route.isFirst);
-              },
-              child: const Text('CONFIRM'),
-            )
-          ],
-        );
-      },
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'add_organization_company.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const routeName = '/home';
+  static const routeName = '/';
 
   HomeScreen({Key? key}) : super(key: key);
 
@@ -25,12 +25,8 @@ class _SearchScreenState extends State<HomeScreen> {
           children: [
             Text("Home"),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddOrganizationCompany()));
-                },
+                onPressed: () => Navigator.pushNamed(
+                    context, AddOrganizationCompany.routeName),
                 child: Text('Add Organization'))
           ],
         ),

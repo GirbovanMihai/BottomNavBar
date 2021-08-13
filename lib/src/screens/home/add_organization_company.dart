@@ -20,12 +20,8 @@ class AddOrganizationCompany extends StatelessWidget {
           children: [
             Text('Add Organization Company'),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddOrganizationAdmin()));
-                },
+                onPressed: () => Navigator.pushNamed(
+                    context, AddOrganizationAdmin.routeName),
                 child: Text('Admin Detail'))
           ],
         ),

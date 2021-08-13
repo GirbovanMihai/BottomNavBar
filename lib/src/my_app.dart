@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bottom_navigation.dart';
+import 'main_page.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -9,8 +9,12 @@ class MyApp extends StatelessWidget {
       title: 'Bottom Navigation',
       theme: ThemeData(
         primaryColor: Colors.amber[900],
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
+        ),
       ),
-      home: BottomNavigation(),
+      home: MainPage(),
     );
   }
 }

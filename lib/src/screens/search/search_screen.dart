@@ -17,7 +17,7 @@ class _SearchScreenState extends State<SearchScreen> {
         title: Text('Search'),
       ),
       body: Container(
-        alignment: Alignment.center,
+        alignment: Alignment.bottomCenter,
         child: Text("Search"),
       ),
     );

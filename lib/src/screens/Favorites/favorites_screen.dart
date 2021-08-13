@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class FavoritesScreen extends StatefulWidget {
   static const routeName = '/favorites';
 
-  FavoritesScreen({Key? key}) : super(key: key);
+  FavoritesScreen({Key? key, GlobalKey<NavigatorState>? navigatorKey})
+      : super(key: key);
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
