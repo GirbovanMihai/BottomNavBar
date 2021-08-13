@@ -34,29 +34,31 @@ class BottomNavBar extends StatelessWidget {
 
   BottomNavigationBarItem _buildItem(TabItem tabItem) {
     return BottomNavigationBarItem(
-      icon: _buildIcon(TabItemData.allTabs[tabItem]!.icon, tabItem),
-      label: TabItemData.allTabs[tabItem]!.label,
-    );
+        icon: _buildIcon(TabItemData.allTabs[tabItem]!.icon, tabItem),
+        title: Padding(
+          padding: EdgeInsets.all(0),
+        ));
   }
 
-  Widget _buildIcon(IconData iconData, TabItem tabItem) => Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-          color: Colors.pink,
-        )),
-        width: double.infinity,
-        height: kBottomNavigationBarHeight,
-        child: Material(
-          color: _getBgColor(tabItem.index),
-          child: InkWell(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(iconData),
-              ],
+  Widget _buildIcon(IconData iconData, TabItem tabItem) => Row(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.pink,
+              )),
+              width: double.infinity,
+              height: kBottomNavigationBarHeight,
+              child: Material(
+                color: _getBgColor(tabItem.index),
+                child: InkWell(
+                  child: Icon(iconData),
+                  onTap: () => onTap(TabItem.values[tabItem.index]),
+                ),
+              ),
             ),
-            onTap: () => onTap(TabItem.values[tabItem.index]),
           ),
-        ),
+        ],
       );
 }
