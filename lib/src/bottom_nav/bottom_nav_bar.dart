@@ -10,55 +10,46 @@ class BottomNavBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<TabItem> onTap;
 
-  static const _selectedBgColor = Colors.amber;
-  static const _unselectedBgColor = Color(0xFFE65100);
+  static const _selectedBgColor = Color(0xFF23A52B);
+  static const _unselectedBgColor = Color(0xFF41B649);
 
   Color _getBgColor(int index) =>
       currentIndex == index ? _selectedBgColor : _unselectedBgColor;
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (index) => onTap(TabItem.values[index]),
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: [
-          _buildItem(TabItem.home),
-          _buildItem(TabItem.search),
-          _buildItem(TabItem.notifications),
-          _buildItem(TabItem.favorites),
-        ]);
-  }
-
-  BottomNavigationBarItem _buildItem(TabItem tabItem) {
-    return BottomNavigationBarItem(
-        icon: _buildIcon(TabItemData.allTabs[tabItem]!.icon, tabItem),
-        title: Padding(
-          padding: EdgeInsets.all(0),
-        ));
-  }
-
-  Widget _buildIcon(IconData iconData, TabItem tabItem) => Row(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                  border: Border.all(
-                color: Colors.pink,
-              )),
-              width: double.infinity,
-              height: kBottomNavigationBarHeight,
-              child: Material(
-                color: _getBgColor(tabItem.index),
-                child: InkWell(
-                  child: Icon(iconData),
-                  onTap: () => onTap(TabItem.values[tabItem.index]),
-                ),
-              ),
-            ),
-          ),
+    return BottomAppBar(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _bottomAppBarItem(TabItem.home),
+          SizedBox(width: 10),
+          _bottomAppBarItem(TabItem.search),
+          SizedBox(width: 10),
+          _bottomAppBarItem(TabItem.notifications),
+          SizedBox(width: 10),
+          _bottomAppBarItem(TabItem.favorites),
         ],
-      );
+      ),
+    );
+  }
+
+  Widget _bottomAppBarItem(TabItem tabItem) {
+    TabItemData tabItemData = TabItemData.allTabs[tabItem]!;
+    return Tooltip(
+      message: tabItemData.label,
+      child: InkWell(
+        onTap: () => onTap(tabItem),
+        child: Container(
+          color: _getBgColor(tabItem.index),
+          width: 60,
+          height: kBottomNavigationBarHeight,
+          child: Icon(
+            tabItemData.icon,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
 }

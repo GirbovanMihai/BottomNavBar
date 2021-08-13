@@ -26,11 +26,11 @@ class TabItemData {
       icon: Icons.search,
     ),
     TabItem.notifications: TabItemData(
-      label: 'Notif.',
+      label: 'Notifications',
       icon: Icons.notifications,
     ),
     TabItem.favorites: TabItemData(
-      label: 'favorites.',
+      label: 'Favorites.',
       icon: Icons.star,
     ),
   };
