@@ -25,35 +25,32 @@ class _BottomNavigationState extends State<MainPage> {
   };
 
   void _selectTab(TabItem tabItem) {
-    debugPrint('_selectTab tabItem:     $tabItem');
-    debugPrint('_selectTab _currentTab: $_currentTab');
-    if (tabItem == _currentTab) {
+    if (tabItem == _currentTab)
       // pop to first route
       _navigatorKeys[_currentTab]!
           .currentState!
           .popUntil((route) => route.isFirst);
-    } else {
+    else
       setState(() => _currentTab = tabItem);
+  }
+
+  Future<bool> _systemBackButtonPressed() async {
+    final isFirstRouteInCurrentTab =
+        !await _navigatorKeys[_currentTab]!.currentState!.maybePop();
+    if (isFirstRouteInCurrentTab) {
+      if (_currentTab != TabItem.home) {
+        _selectTab(TabItem.home);
+        return false;
+      }
     }
+    // let system handle back button if we're on the first route
+    return isFirstRouteInCurrentTab;
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('_currentTab.index: ${_currentTab.index}');
     return WillPopScope(
-      onWillPop: () async {
-        final isFirstRouteInCurrentTab =
-            !await _navigatorKeys[_currentTab]!.currentState!.maybePop();
-        debugPrint('isFirstRouteInCurrentTab: $isFirstRouteInCurrentTab');
-        if (isFirstRouteInCurrentTab) {
-          if (_currentTab != TabItem.home) {
-            _selectTab(TabItem.home);
-            return false;
-          }
-        }
-        // let system handle back button if we're on the first route
-        return isFirstRouteInCurrentTab;
-      },
+      onWillPop: _systemBackButtonPressed,
       child: Scaffold(
         body: SafeArea(
           top: false,
@@ -62,7 +59,6 @@ class _BottomNavigationState extends State<MainPage> {
             index: _currentTab.index,
             children: _getNavigators,
           ),
-
           //child: _getNavigator(_currentTab),
         ),
         bottomNavigationBar: BottomNavBar(
@@ -71,21 +67,6 @@ class _BottomNavigationState extends State<MainPage> {
         ),
       ),
     );
-  }
-
-  Widget _getNavigator(TabItem tabItem) {
-    switch (tabItem) {
-      case TabItem.home:
-        return HomeNavigator(navigatorKey: _navigatorKeys[TabItem.home]);
-      case TabItem.search:
-        return SearchNavigator(navigatorKey: _navigatorKeys[TabItem.search]);
-      case TabItem.notifications:
-        return NotificationsNavigator(
-            navigatorKey: _navigatorKeys[TabItem.notifications]);
-      case TabItem.favorites:
-        return FavoritesNavigator(
-            navigatorKey: _navigatorKeys[TabItem.favorites]);
-    }
   }
 
   List<Widget> get _getNavigators {
@@ -104,4 +85,19 @@ class _BottomNavigationState extends State<MainPage> {
       ),
     ];
   }
+
+  // Widget _getNavigator(TabItem tabItem) {
+  //   switch (tabItem) {
+  //     case TabItem.home:
+  //       return HomeNavigator(navigatorKey: _navigatorKeys[TabItem.home]);
+  //     case TabItem.search:
+  //       return SearchNavigator(navigatorKey: _navigatorKeys[TabItem.search]);
+  //     case TabItem.notifications:
+  //       return NotificationsNavigator(
+  //           navigatorKey: _navigatorKeys[TabItem.notifications]);
+  //     case TabItem.favorites:
+  //       return FavoritesNavigator(
+  //           navigatorKey: _navigatorKeys[TabItem.favorites]);
+  //   }
+  // }
 }

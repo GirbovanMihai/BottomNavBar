@@ -23,11 +23,11 @@ class BottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _bottomAppBarItem(TabItem.home),
-          SizedBox(width: 10),
+          SizedBox(width: 10.0),
           _bottomAppBarItem(TabItem.search),
-          SizedBox(width: 10),
+          SizedBox(width: 10.0),
           _bottomAppBarItem(TabItem.notifications),
-          SizedBox(width: 10),
+          SizedBox(width: 10.0),
           _bottomAppBarItem(TabItem.favorites),
         ],
       ),
@@ -42,7 +42,7 @@ class BottomNavBar extends StatelessWidget {
         onTap: () => onTap(tabItem),
         child: Container(
           color: _getBgColor(tabItem.index),
-          width: 60,
+          width: 68.0,
           height: kBottomNavigationBarHeight,
           child: Icon(
             tabItemData.icon,
