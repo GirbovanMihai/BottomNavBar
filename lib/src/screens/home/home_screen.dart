@@ -25,9 +25,10 @@ class _SearchScreenState extends State<HomeScreen> {
           children: [
             Text("Home"),
             ElevatedButton(
-                onPressed: () => Navigator.pushNamed(
-                    context, AddOrganizationCompany.routeName),
-                child: Text('Add Organization'))
+              onPressed: () => Navigator.pushNamed(
+                  context, AddOrganizationCompany.routeName),
+              child: Text('Add Organization'),
+            )
           ],
         ),
       ),
